@@ -36,5 +36,8 @@ html ,body{
     min-height: 20px;
     width: 100vw;
   }
+  .App-main{
+    margin: auto;
+  }
 }
 

@@ -1,0 +1,24 @@
+.todolist-container {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.add-item {
+  margin-right: 16px;
+  height: 30px;
+  position: relative;
+  top: -2px;
+}
+.todoItem {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.todoItem .todoItem-title{
+    width: 200px;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}

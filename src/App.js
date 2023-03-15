@@ -1,5 +1,6 @@
 import './App.css';
 import Main from './components/Main/Main';
+import Toast from './components/Toast/Toast';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload.
         </p>
       </header> */}
+      <Toast />
     </div>
   );
 }
