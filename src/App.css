@@ -23,7 +23,9 @@ html ,body{
   font-weight: 600;
 }
 .App-main{
+  padding: 24px;
   flex: 1;
+  color: #282c34;
 }
 
 @media only screen and (max-width: 700px) {

@@ -1,4 +1,5 @@
 import './App.css';
+import Main from './components/Main/Main';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         </div>
       </aside>
       <main className='App-main'>
-
+        <Main />
       </main>
       {/* <header className="App-header">
         <p>
