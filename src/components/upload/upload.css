@@ -1,0 +1,14 @@
+.upload-container{
+    text-align: left;
+}
+
+.upload-filename{
+    padding: 2px 0;
+}
+
+.uploadImg{
+    display: block;
+    padding: 6px;
+    width: 60px;
+    height: 60px;
+}
