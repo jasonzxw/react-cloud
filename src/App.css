@@ -1,6 +1,7 @@
 
 *{
   box-sizing: border-box;
+  touch-action: none;
 }
 
 html ,body{

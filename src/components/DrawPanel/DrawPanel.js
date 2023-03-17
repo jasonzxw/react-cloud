@@ -1,7 +1,7 @@
 /*
  * @author: jason_zuo
  * @LastEditors: jason_zuo
- * @LastEditTime: 2023-03-17 16:13:59
+ * @LastEditTime: 2023-03-17 17:04:55
  * @FilePath: \react-cloud\src\components\DrawPanel\DrawPanel.js
  */
 import { useEffect, useRef } from "react";
@@ -21,9 +21,11 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
 
     const drawStatrt = (e) => {
       isDarwingRef.current = true;
+      const isTouch = e instanceof TouchEvent ;
+      const {left,top} = canvasEl.getBoundingClientRect();
       darwStartPosition.current = {
-        x: e.offsetX,
-        y: e.offsetY,
+        x: isTouch?  e.touches[0].clientX - left: e.offsetX,
+        y: isTouch?  e.touches[0].clientY -top : e.offsetY,
       };
       let canvasCtxRef = canvasRef.current.getContext("2d");
       canvasCtxRef.strokeStyle  = colorRef.current.value;
@@ -31,13 +33,15 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
     };
     const remove = (e) => {
       if (isDarwingRef.current) {
+        const isTouch = e instanceof TouchEvent ;
         let ctx = canvasRef.current.getContext("2d");
+        const {left,top} = canvasEl.getBoundingClientRect();
         ctx.moveTo(darwStartPosition.current.x, darwStartPosition.current.y);
-        ctx.lineTo(e.offsetX, e.offsetY);
+        isTouch? ctx.lineTo(e.touches[0].clientX -left ,e.touches[0].clientY - top ) : ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
         darwStartPosition.current = {
-          x: e.offsetX,
-          y: e.offsetY,
+            x: isTouch?  e.touches[0].clientX - left: e.offsetX,
+            y: isTouch?  e.touches[0].clientY -top: e.offsetY,
         };
       }
     };
@@ -51,9 +55,18 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
     canvasEl.addEventListener("mousemove", remove);
     canvasEl.addEventListener("mouseup", endDraw);
     canvasEl.addEventListener("mouseleave", endDraw);
-    canvasEl.addEventListener("touchstart", drawStatrt);
-    canvasEl.addEventListener("touchmove", remove);
-    canvasEl.addEventListener("touchend", endDraw);
+    canvasEl.addEventListener("touchstart", (e)=> {
+        e.preventDefault()
+        drawStatrt(e)
+    });
+    canvasEl.addEventListener("touchmove", (e) => {
+        e.preventDefault()
+        remove(e)
+    });
+    canvasEl.addEventListener("touchend", (e) =>{
+        e.preventDefault()
+        endDraw(e)
+    });
   }, []);
 
   const generateUrl = () => {
