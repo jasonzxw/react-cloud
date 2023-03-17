@@ -1,0 +1,14 @@
+
+.draw-container{
+    margin-top: 16px;
+}
+
+.draw-panel{
+    margin-top: 16px;
+    border: 1px solid black;
+}
+
+.draw-container .color-select{
+    text-align: left;
+    font-weight: 500;
+}
