@@ -1,7 +1,7 @@
 /*
  * @author: jason_zuo
  * @LastEditors: jason_zuo
- * @LastEditTime: 2023-03-17 14:34:08
+ * @LastEditTime: 2023-03-17 16:13:59
  * @FilePath: \react-cloud\src\components\DrawPanel\DrawPanel.js
  */
 import { useEffect, useRef } from "react";
@@ -11,14 +11,12 @@ import { getCurrentDate } from "../../Utils/date";
 const DrawPanel = ({ width = 100, height = 300 }) => {
   let colorRef = useRef();
   let canvasRef = useRef();
-  let canvasCtxRef = useRef();
   let isDarwingRef = useRef(false);
   let darwStartPosition = useRef();
 
   useEffect(() => {
     let drawContainerEl = document.getElementById("draw-container");
     let canvasEl = document.getElementById("draw-panel");
-    canvasCtxRef = canvasEl.getContext("2d");
     canvasEl.width = drawContainerEl.clientWidth;
 
     const drawStatrt = (e) => {
@@ -27,12 +25,13 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
         x: e.offsetX,
         y: e.offsetY,
       };
+      let canvasCtxRef = canvasRef.current.getContext("2d");
       canvasCtxRef.strokeStyle  = colorRef.current.value;
       canvasCtxRef.beginPath();
     };
     const remove = (e) => {
       if (isDarwingRef.current) {
-        let ctx = canvasCtxRef;
+        let ctx = canvasRef.current.getContext("2d");
         ctx.moveTo(darwStartPosition.current.x, darwStartPosition.current.y);
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
@@ -44,6 +43,7 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
     };
 
     const endDraw = () => {
+      let canvasCtxRef = canvasRef.current.getContext("2d");
       isDarwingRef.current = false;
       canvasCtxRef.closePath();
     };
