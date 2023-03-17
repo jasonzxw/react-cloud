@@ -4,36 +4,21 @@
  * @LastEditTime: 2023-03-17 14:34:08
  * @FilePath: \react-cloud\src\components\DrawPanel\DrawPanel.js
  */
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./DrawPanel.css";
 import Download from "../DownLoad/Download";
 import { getCurrentDate } from "../../Utils/date";
 const DrawPanel = ({ width = 100, height = 300 }) => {
-  const [canvasEl, setCanvasEl] = useState(null);
-  const [ctx, setCtx] = useState(null);
   let colorRef = useRef();
-  let shapeRef = useRef();
   let canvasRef = useRef();
   let canvasCtxRef = useRef();
   let isDarwingRef = useRef(false);
   let darwStartPosition = useRef();
 
-  const drawShape = ({ type = "default" }) => {};
-
-  const drawRectangle = ({ stroke = true, x, y, width, height }) => {
-    if (stroke) {
-      ctx.strokeRect(x, y, width, height);
-    } else {
-      ctx.fillRect(x, y, width, height);
-    }
-  };
-
   useEffect(() => {
     let drawContainerEl = document.getElementById("draw-container");
-    let canvasEl = (canvasRef = document.getElementById("draw-panel"));
+    let canvasEl = document.getElementById("draw-panel");
     canvasCtxRef = canvasEl.getContext("2d");
-    setCtx(canvasEl.getContext("2d"));
-    setCanvasEl(canvasEl);
     canvasEl.width = drawContainerEl.clientWidth;
 
     const drawStatrt = (e) => {
@@ -97,6 +82,7 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
         id="draw-panel"
         width={width}
         height={height}
+        ref={canvasRef}
       >
         hi
       </canvas>
