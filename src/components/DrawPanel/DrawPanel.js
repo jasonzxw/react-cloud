@@ -165,6 +165,11 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
     el.style.borderWidth = '1px'
     el.style.backgroundColor = backgroundColorRef.current.value;
 
+    // 解决canvas导出时背景色问题，设置style不工作
+    let ctx = el.getContext("2d");
+    ctx.fillStyle = backgroundColorRef.current.value;
+    ctx.fillRect(0, 0, el.width, el.height);
+
     const btn = document.getElementById('btn_backgrouncolor');
     btn.style.backgroundColor = backgroundColorRef.current.value;
     btn.style.borderColor = backgroundColorRef.current.value;
