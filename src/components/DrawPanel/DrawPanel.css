@@ -8,7 +8,49 @@
     border: 1px solid black;
 }
 
-.draw-container .color-select{
+.draw-container  .draw-action .color-select{
+    display: flex;
+    align-items: center;
     text-align: left;
     font-weight: 500;
 }
+
+.draw-container  .draw-action{
+    display: flex;
+    flex-wrap: wrap;
+}
+.draw-container  .draw-action .clean-select ,
+.draw-container  .draw-action  .draw-select ,
+.draw-container  .draw-action .backgroundcolor-select,
+.draw-container  .draw-action .linewidth-select,
+.draw-container  .draw-action .clearscreen-select{
+    text-align: left;
+    margin-left: 10px;
+}
+
+.color-example{
+    display: none;
+    border-radius: 50%;
+    margin-left: 10px;
+    /* display: inline-block; */
+    width: 24px;
+    height: 24px;
+    transition: all 1s ease-in-out;
+}
+
+input[type = color]{
+    position: absolute;
+    top: -99px;
+}
+
+@media only screen and (max-width: 700px){
+    .draw-container  .draw-action .linewidth-select,
+    .draw-container  .draw-action .clearscreen-select{
+        margin-left: 0px;
+        margin-top: 16px;
+    }
+    .draw-container  .draw-action .clearscreen-select{
+        margin-left: 10px;
+    }
+}
+
