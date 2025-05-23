@@ -50,8 +50,12 @@ const DrawPanel = ({ width = 100, height = 300 }) => {
         y: e.offsetY,
       };
       let canvasCtxRef = canvasRef.current.getContext("2d");
+      canvasCtxRef.imageSmoothingEnabled = true; // 全局抗锯齿
+      canvasCtxRef.imageSmoothingQuality = 'high'; // 高质量平滑（部分浏览器支持）
       canvasCtxRef.lineWidth  = drawLinwWidth.current;
       canvasCtxRef.strokeStyle = colorRef.current.value;
+      canvasCtxRef.lineCap = "round";
+      canvasCtxRef.lineJoin = "round";
       canvasCtxRef.beginPath();
     };
 
